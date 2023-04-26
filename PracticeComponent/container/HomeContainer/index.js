@@ -1,35 +1,147 @@
-import React from 'react';
+import React, {useState} from 'react';
 import UserData from '../UserData';
-import {View, Button} from 'react-native';
+import {View, Button, ScrollView, Text, TextInput} from 'react-native';
+import style from './style';
 
-class HomeContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        firstName: 'Anusha',
-        lastName: 'Antony',
-        gender: 'Female',
-        age: '27',
-        dob: '27-09-1995',
-        mobile: '009900990',
-        homePhone: '9900990',
-        edu: 'B.Tech',
-        eduArea: 'Electronics',
-      },
-    };
-  }
+const HomeContainer = ({navigation}) => {
+  // constructor(props) {
+  //super(props);
+  // this.state = {
+  //   user: {
+  //     firstName: 'Anusha',
+  //     lastName: 'Antony',
+  //     gender: 'Female',
+  //     age: '27',
+  //     dob: '27-09-1995',
+  //     mobile: '009900990',
+  //     homePhone: '9900990',
+  //     edu: 'B.Tech',
+  //     eduArea: 'Electronics',
+  //   },
+  // };
+  // }
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [dob, setDob] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [homePhone, setHomePhone] = useState('');
+  const [edu, setEdu] = useState('');
+  const [eduArea, setEduArea] = useState('');
 
-  render() {
-    const {user} = this.state;
+  renderPersonal = () => {
     return (
-      <View style={{flex: 1}}>
-        <UserData user={user} />
+      <>
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setFirstName(newText)}
+          defaultValue={firstName}
+          placeholder="First Name"
+        />
+
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setLastName(newText)}
+          defaultValue={lastName}
+          placeholder="Last Name"
+        />
+
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setAge(newText)}
+          defaultValue={age}
+          placeholder="Age"
+        />
+
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setGender(newText)}
+          defaultValue={gender}
+          placeholder="Gender"
+        />
+
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setDob(newText)}
+          defaultValue={dob}
+          placeholder="Date Of Birth"
+        />
+      </>
+    );
+  };
+
+  renderContacts = () => {
+    return (
+      <>
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setMobile(newText)}
+          defaultValue={mobile}
+          placeholder="Mobile"
+        />
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setHomePhone(newText)}
+          defaultValue={homePhone}
+          placeholder="Home Phone"
+        />
+      </>
+    );
+  };
+  renderEducation = () => {
+    return (
+      <>
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setEdu(newText)}
+          defaultValue={edu}
+          placeholder="Highest Education"
+        />
+        <TextInput
+          style={style.inputField}
+          onChangeText={newText => setEduArea(newText)}
+          defaultValue={eduArea}
+          placeholder="Area Of Specialization"
+        />
+      </>
+    );
+  };
+
+  return (
+    <View style={style.view}>
+      <ScrollView>
+        <Text style={style.caption}>Create An Account</Text>
+
+        {this.renderPersonal()}
+
+        {this.renderContacts()}
+
+        {this.renderEducation()}
         <Button
-          title={'Change Text'}
+          title="Show"
           onPress={() => {
-            console.log('Hello');
-            this.setState({
+            /* 1. Navigate to the Details route with params */
+            navigation.navigate('Details', {
+              firstName: firstName,
+              lastName: lastName,
+              age: age,
+              dob: dob,
+              gender: gender,
+              mobile: mobile,
+              homePhone: homePhone,
+              edu: edu,
+              eduArea: eduArea,
+            });
+          }}
+        />
+      </ScrollView>
+
+      {/* <Button
+        title={'Change Text'}
+        onPress={() => {
+          this.setState(
+            {
               user: {
                 firstName: 'Luke',
                 lastName: 'Francis',
@@ -41,13 +153,14 @@ class HomeContainer extends React.Component {
                 edu: 'BE',
                 eduArea: 'Computer',
               },
-            });
-            console.log(user);
-          }}
-        />
-      </View>
+            },
+            () => console.log(user),
+          );
+        }}
+      /> */}
+    </View>
 
-      /* <Image
+    /* <Image
             resizeMode="center"
             style={{
               height: 100,
@@ -78,7 +191,6 @@ class HomeContainer extends React.Component {
               INSIDE TEXT
             </Text>
           </ImageBackground> */
-    );
-  }
-}
+  );
+};
 export default HomeContainer;
