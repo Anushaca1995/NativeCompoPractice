@@ -1,114 +1,113 @@
-import {React, useState} from 'react';
+import React from 'react';
 import {View, ScrollView, TextInput, Text, Button} from 'react-native';
 import style from '../HomeContainer/style';
 
-const UserData = ({navigation}) => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     firstName: this.props?.user?.firstName,
-  //     lastName: this.props?.user?.lastName,
-  //     age: this.props?.user?.age,
-  //     dob: this.props?.user?.dob,
-  //     mobile: this.props?.user?.mobile,
-  //     homePhone: this.props?.user?.homePhone,
-  //     edu: this.props?.user?.edu,
-  //     eduArea: this.props?.user?.eduArea,
-  //     gender: this.props?.user?.gender,
-  //   };
-  // }
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+class UserData extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: this.props?.user?.firstName,
+      lastName: this.props?.user?.lastName,
+      age: this.props?.user?.age,
+      dob: this.props?.user?.dob,
+      mobile: this.props?.user?.mobile,
+      homePhone: this.props?.user?.homePhone,
+      edu: this.props?.user?.edu,
+      eduArea: this.props?.user?.eduArea,
+      gender: this.props?.user?.gender,
+    };
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
+  }
   renderPersonal = () => {
+    const {firstName, lastName, age, dob, gender} = this.state;
     return (
       <>
         <TextInput
           style={style.inputField}
-          onChangeText={newText => setFirstName(newText)}
+          onChangeText={onChangeText => {
+            this.setState({firstName: onChangeText});
+          }}
           defaultValue={firstName}
           placeholder="First Name"
         />
-        <Text>{firstName}</Text>
 
         <TextInput
           style={style.inputField}
-          onChangeText={newText => setLastName(newText)}
           defaultValue={lastName}
           placeholder="Last Name"
         />
-        <Text>{lastName}</Text>
+
+        <TextInput
+          style={style.inputField}
+          defaultValue={age}
+          placeholder="Age"
+        />
+
+        <TextInput
+          style={style.inputField}
+          defaultValue={gender}
+          placeholder="Gender"
+        />
+
+        <TextInput
+          style={style.inputField}
+          defaultValue={dob}
+          placeholder="Date Of Birth"
+        />
       </>
     );
   };
 
   renderContacts = () => {
-    const {mobile, homePhone} = props.user;
+    const {mobile, homePhone} = this.state;
     return (
       <>
         <TextInput
           style={style.inputField}
-          onChangeText={onChangeText => {
-            this.setState({mobile: onChangeText});
-          }}
-          value={mobile}
-          placeholder="Mobile Number"
+          defaultValue={mobile}
+          placeholder="Mobile"
         />
         <TextInput
           style={style.inputField}
-          onChangeText={onChangeText => {
-            this.setState({homePhone: onChangeText});
-          }}
-          value={homePhone}
-          placeholder="Home Number"
+          defaultValue={homePhone}
+          placeholder="Home Phone"
         />
       </>
     );
   };
   renderEducation = () => {
-    const {edu, eduArea} = props.user;
+    const {edu, eduArea} = this.state;
     return (
       <>
         <TextInput
           style={style.inputField}
-          onChangeText={onChangeText => {
-            this.setState({edu: onChangeText});
-          }}
-          value={edu}
+          defaultValue={edu}
           placeholder="Highest Education"
         />
         <TextInput
           style={style.inputField}
-          onChangeText={onChangeText => {
-            this.setState({eduArea: onChangeText});
-          }}
-          value={eduArea}
-          placeholder="Area of Specialization"
+          defaultValue={eduArea}
+          placeholder="Area Of Specialization"
         />
       </>
     );
   };
+  render() {
+    return (
+      <View style={style.view}>
+        <ScrollView>
+          <Text style={style.caption}>Create An Account</Text>
 
-  return (
-    <View style={style.view}>
-      <ScrollView>
-        <Text style={style.caption}>Create An Account</Text>
+          {this.renderPersonal()}
 
-        {this.renderPersonal()}
+          {this.renderContacts()}
 
-        {/* {this.renderContacts()}
-
-        {this.renderEducation()} */}
-        <Button
-          title="Go to Details"
-          onPress={() => {
-            /* 1. Navigate to the Details route with params */
-            navigation.navigate('Details', {
-              firstName: firstName,
-            });
-          }}
-        />
-      </ScrollView>
-    </View>
-  );
-};
+          {this.renderEducation()}
+        </ScrollView>
+      </View>
+    );
+  }
+}
 export default UserData;

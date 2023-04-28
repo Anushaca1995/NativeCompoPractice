@@ -11,6 +11,9 @@ import HomeContainer from './container/HomeContainer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DetailsScreen from './container/DetailsScreen';
+import ClassHomeContainer from './container/ClassHome';
+import ClassUserData from './container/UserData';
+import UserData from './container/UserData';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,8 +23,10 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeContainer} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        {/* <Stack.Screen name="Home" component={HomeContainer} />
+        <Stack.Screen name="Details" component={DetailsScreen} /> */}
+        <Stack.Screen name="Home" component={ClassHomeContainer} />
+        <Stack.Screen name="Details" component={UserData} />
       </Stack.Navigator>
     </NavigationContainer>
   );
