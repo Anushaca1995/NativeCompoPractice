@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, ScrollView, TextInput, Text, Button} from 'react-native';
 import style from '../HomeContainer/style';
+import _ from 'lodash';
 
-class UserData extends React.Component {
+class UserData extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,9 +18,23 @@ class UserData extends React.Component {
       gender: this.props?.user?.gender,
     };
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
+
+  componentDidUpdate(nextProps, nextState) {
+    if (!_.isEqual(nextProps, this.props)) {
+      this.setState({
+        firstName: this.props?.user?.firstName,
+        lastName: this.props?.user?.lastName,
+        age: this.props?.user?.age,
+        dob: this.props?.user?.dob,
+        mobile: this.props?.user?.mobile,
+        homePhone: this.props?.user?.homePhone,
+        edu: this.props?.user?.edu,
+        eduArea: this.props?.user?.eduArea,
+        gender: this.props?.user?.gender,
+      });
+    }
   }
+
   renderPersonal = () => {
     const {firstName, lastName, age, dob, gender} = this.state;
     return (
