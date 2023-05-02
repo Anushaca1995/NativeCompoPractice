@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Button, ScrollView, Text, TextInput} from 'react-native';
 import style from './style';
 
@@ -12,6 +12,18 @@ const FuncUser = props => {
   const [homePhone, setHomePhone] = useState(props?.user?.homePhone);
   const [edu, setEdu] = useState(props?.user?.edu);
   const [eduArea, setEduArea] = useState(props?.user?.eduArea);
+
+  useEffect(() => {
+    setFirstName(props?.user?.firstName);
+    setLastName(props?.user?.lastName);
+    setAge(props?.user?.age);
+    setGender(props?.user?.gender);
+    setDob(props?.user?.dob);
+    setMobile(props?.user?.mobile);
+    setHomePhone(props?.user?.homePhone);
+    setEdu(props?.user?.edu);
+    setEduArea(props?.user?.eduArea);
+  }, [props]);
 
   renderPersonal = () => {
     return (
@@ -119,28 +131,6 @@ const FuncUser = props => {
           }}
         />
       </ScrollView>
-
-      {/* <Button
-        title={'Change Text'}
-        onPress={() => {
-          this.setState(
-            {
-              user: {
-                firstName: 'Luke',
-                lastName: 'Francis',
-                gender: 'Male',
-                age: '5',
-                dob: '27-09-2018',
-                mobile: '8800880',
-                homePhone: '00880088',
-                edu: 'BE',
-                eduArea: 'Computer',
-              },
-            },
-            () => console.log(user),
-          );
-        }}
-      /> */}
     </View>
 
     /* <Image
