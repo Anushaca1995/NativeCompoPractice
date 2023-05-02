@@ -32,15 +32,15 @@ const HomeContainer = ({navigation}) => {
     edu: 'B.Tech',
     eduArea: 'Electronics',
   };
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [dob, setDob] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [homePhone, setHomePhone] = useState('');
-  const [edu, setEdu] = useState('');
-  const [eduArea, setEduArea] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [age, setAge] = useState('');
+  // const [gender, setGender] = useState('');
+  // const [dob, setDob] = useState('');
+  // const [mobile, setMobile] = useState('');
+  // const [homePhone, setHomePhone] = useState('');
+  // const [edu, setEdu] = useState('');
+  // const [eduArea, setEduArea] = useState('');
 
   renderPersonal = () => {
     return (
