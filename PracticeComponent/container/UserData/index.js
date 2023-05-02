@@ -3,7 +3,7 @@ import {View, ScrollView, TextInput, Text, Button} from 'react-native';
 import style from '../HomeContainer/style';
 import _ from 'lodash';
 
-class UserData extends React.PureComponent {
+class UserData extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +17,11 @@ class UserData extends React.PureComponent {
       eduArea: this.props?.user?.eduArea,
       gender: this.props?.user?.gender,
     };
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      !_.isEqual((nextProps, this.props)) || !_.isEqual((nextState, this.state))
+    );
   }
 
   componentDidUpdate(nextProps, nextState) {
