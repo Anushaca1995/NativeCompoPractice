@@ -1,46 +1,17 @@
 import React, {useState} from 'react';
-import UserData from '../UserData';
 import {View, Button, ScrollView, Text, TextInput} from 'react-native';
 import style from './style';
-import FuncUser from '../FuncUser';
 
-const HomeContainer = ({navigation}) => {
-  // constructor(props) {
-  //super(props);
-  // this.state = {
-  //   user: {
-  // firstName: 'Anusha',
-  // lastName: 'Antony',
-  // gender: 'Female',
-  // age: '27',
-  // dob: '27-09-1995',
-  // mobile: '009900990',
-  // homePhone: '9900990',
-  // edu: 'B.Tech',
-  // eduArea: 'Electronics',
-  //   },
-  // };
-  // }
-  const user = {
-    firstName: 'Anusha',
-    lastName: 'Antony',
-    gender: 'Female',
-    age: '27',
-    dob: '27-09-1995',
-    mobile: '009900990',
-    homePhone: '9900990',
-    edu: 'B.Tech',
-    eduArea: 'Electronics',
-  };
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [dob, setDob] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [homePhone, setHomePhone] = useState('');
-  const [edu, setEdu] = useState('');
-  const [eduArea, setEduArea] = useState('');
+const FuncUser = props => {
+  const [firstName, setFirstName] = useState(props?.user?.firstName);
+  const [lastName, setLastName] = useState(props?.user?.lastName);
+  const [age, setAge] = useState(props?.user?.age);
+  const [gender, setGender] = useState(props?.user?.gender);
+  const [dob, setDob] = useState(props?.user?.dob);
+  const [mobile, setMobile] = useState(props?.user?.mobile);
+  const [homePhone, setHomePhone] = useState(props?.user?.homePhone);
+  const [edu, setEdu] = useState(props?.user?.edu);
+  const [eduArea, setEduArea] = useState(props?.user?.eduArea);
 
   renderPersonal = () => {
     return (
@@ -122,7 +93,32 @@ const HomeContainer = ({navigation}) => {
 
   return (
     <View style={style.view}>
-      <FuncUser user={user} />
+      <ScrollView>
+        <Text style={style.caption}>Create An Account</Text>
+
+        {this.renderPersonal()}
+
+        {this.renderContacts()}
+
+        {this.renderEducation()}
+        <Button
+          title="Show"
+          onPress={() => {
+            /* 1. Navigate to the Details route with params */
+            props.navigation.navigate('Details', {
+              firstName: firstName,
+              lastName: lastName,
+              age: age,
+              dob: dob,
+              gender: gender,
+              mobile: mobile,
+              homePhone: homePhone,
+              edu: edu,
+              eduArea: eduArea,
+            });
+          }}
+        />
+      </ScrollView>
 
       {/* <Button
         title={'Change Text'}
@@ -180,4 +176,4 @@ const HomeContainer = ({navigation}) => {
           </ImageBackground> */
   );
 };
-export default HomeContainer;
+export default FuncUser;
