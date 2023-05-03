@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo, memo} from 'react';
 import {View, Button, ScrollView, Text, TextInput} from 'react-native';
 import style from './style';
 
@@ -12,6 +12,7 @@ const FuncUser = props => {
   const [homePhone, setHomePhone] = useState(props?.user?.homePhone);
   const [edu, setEdu] = useState(props?.user?.edu);
   const [eduArea, setEduArea] = useState(props?.user?.eduArea);
+  const [celsius, setCelcius] = useState(props?.celsius);
 
   useEffect(() => {
     setFirstName(props?.user?.firstName);
@@ -103,19 +104,33 @@ const FuncUser = props => {
     );
   };
 
+  const calculateFarenheit = useMemo(() => {
+    const val = (celsius * 9) / 5 + 32;
+    console.log('Farenheit ' + val);
+    return val;
+  }, [celsius]);
+  //   const calculateFarenheit = () => {
+  //     const val = (celsius * 9) / 5 + 32;
+  //     console.log('Farenheit ' + val);
+  //     return val;
+  //   };
+
   return (
     <View style={style.view}>
       <ScrollView>
         <Text style={style.caption}>Create An Account</Text>
+        <Text>
+          {celsius} °C = {calculateFarenheit} °F
+        </Text>
+        {renderPersonal()}
 
-        {this.renderPersonal()}
+        {renderContacts()}
 
-        {this.renderContacts()}
-
-        {this.renderEducation()}
+        {renderEducation()}
         <Button
           title="Show"
           onPress={() => {
+            setCelcius(10);
             /* 1. Navigate to the Details route with params */
             props.navigation.navigate('Details', {
               firstName: firstName,
@@ -166,4 +181,5 @@ const FuncUser = props => {
           </ImageBackground> */
   );
 };
+// export default memo(FuncUser);
 export default FuncUser;

@@ -19,7 +19,7 @@ const HomeContainer = ({navigation}) => {
   return (
     <View style={style.view}>
       <ScrollView>
-        <FuncUser user={user} navigation={navigation} />
+        <FuncUser user={user} navigation={navigation} celsius={90} />
 
         <Button
           title={'Change Text'}
